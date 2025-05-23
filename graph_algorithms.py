@@ -89,7 +89,42 @@ def get_diameter(graph: Graph) -> int: #use a heuristic instead of getting exact
 
 
 def get_clustering_coefficient(graph: Graph) -> float:
-	raise NotImplementedError
+	def get_max_edges(num_neighbors: int):
+		#gets the max amount of edges that a nodes neighbors can have
+		#If a node A has 3 neighbors: B, C, and D, the possible edges between neighbors are:
+		#B-C, B-D, C-D → 3 possible edges
+		return num_neighbors*(num_neighbors-1)//2
+	
+	clustering_coefficients = {}
+	
+	for u in range(0,graph.get_num_nodes()): #calculate the clustering coefficient for i
+		neighbors = graph.get_neighbors(u)
+		max_edges = get_max_edges(len(neighbors))
+		actual_edges = 0
+		for v in neighbors: #for each neighbor's neighbor 
+			#for example for a, we have 3 neighbors b,c,d
+			#this for loop is meant to check each b c and d to see if there is an edge between them
+			if v < u: #dont remember exactly but we discussed a heuristic in class where U<V<W
+				#this is so we dont count edges multiple times
+				continue
+			v_neighbors = graph.get_neighbors(v)
+			for w in v_neighbors:
+				if w > v and graph.is_adjacent(u,w):
+					actual_edges+=1
+		#print(f"actual edges for {u}: {actual_edges}")
+		#print(f"max edges for {u}: {max_edges}")
+		clustering_coefficients[u] = actual_edges/max_edges #add to our dict to compute average later
+
+	
+	#compute average
+	#print(f'clustering_coefficients: {clustering_coefficients}')
+	#return sum(clustering_coefficients.values())/(len(clustering_coefficients))
+	non_zero_coeffs = [coeff for coeff in clustering_coefficients.values() if coeff > 0]
+	if not non_zero_coeffs:  # Avoid division by zero
+		return 0
+	return sum(non_zero_coeffs) / len(non_zero_coeffs)
+	
+
 
 
 def get_degree_distribution(graph: Graph) -> dict[int, int]:

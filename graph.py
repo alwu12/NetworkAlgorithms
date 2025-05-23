@@ -24,6 +24,11 @@ class Graph:
 
 	def get_neighbors(self, node: int) -> Iterable[int]:
 		return self.adjacency_list[node]
+	
+	def is_adjacent(self, node1: int, node2: int):
+		if node2 in self.adjacency_list[node1]:
+			return True
+		return False
 
 	# feel free to define new methods in addition to the above
 	# fill in the definitions of each required member function (above),
