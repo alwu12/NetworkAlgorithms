@@ -2,8 +2,8 @@
 # Feel free to comment out these lines before your algorithms are implemented.
 from graph import Graph # type: ignore
 from graph_algorithms import get_diameter # type: ignore
-from graph_algorithms import get_clustering_coefficient # type: ignore
-from graph_algorithms import get_degree_distribution # type: ignore
+#from graph_algorithms import get_clustering_coefficient # type: ignore
+#from graph_algorithms import get_degree_distribution # type: ignore
 
 # Details about Gradescope submission:
 
