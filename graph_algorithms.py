@@ -83,39 +83,71 @@ def get_diameter(graph: Graph) -> int: #use a heuristic instead of getting exact
 
 	return dmax
 
+'''
+def degeneracy_ordering_with_Nv(graph): # for get_clustering_coefficient
+	num_nodes = graph.get_num_nodes()
+	degree = [len(graph.get_neighbors(v)) for v in range(num_nodes)]
+	D = defaultdict(deque)
+	for v in range(num_nodes):
+		D[degree[v]].append(v)
+
+	position = list(degree)  # current dv values
+	in_L = [False] * num_nodes
+	Nv = [[] for _ in range(num_nodes)]
+	L = []
+	k = 0
+
+	for _ in range(num_nodes):
+		i = 0
+		while i not in D or not D[i]:
+			i += 1
+		k = max(k, i)
+		v = D[i].popleft()
+		in_L[v] = True
+		L.insert(0, v)  # add to beginning of L
+
+		for w in graph.get_neighbors(v):
+			if not in_L[w]:
+				Nv[w].append(v)
+
+				old_d = position[w]
+				position[w] -= 1
+				new_d = position[w]
+
+				D[old_d].remove(w)
+				D[new_d].append(w)
+
+	return k, L, Nv
 
 
+def get_triangles(graph: Graph) -> float: #for get_clustering_coefficient
+	_, ordering, Nv = degeneracy_ordering_with_Nv(graph)
+
+	triangle_count = 0
+	for v in ordering:
+		neighbors = Nv[v]
+		for i in range(len(neighbors)):
+			u = neighbors[i]
+			for j in range(i + 1, len(neighbors)):
+				w = neighbors[j]
+				if graph.is_adjacent(u, w):
+					triangle_count += 1
+	return triangle_count
+'''
 
 
 
 def get_clustering_coefficient(graph: Graph) -> float:
-	def get_max_edges(num_neighbors: int):
-		#gets the max amount of edges that a nodes neighbors can have
-		#If a node A has 3 neighbors: B, C, and D, the possible edges between neighbors are:
-		#B-C, B-D, C-D → 3 possible edges
-		return num_neighbors*(num_neighbors-1)//2
-	
-	clustering_coefficients = {}
-	
-	for u in range(0,graph.get_num_nodes()): #calculate the clustering coefficient for i
-		neighbors = graph.get_neighbors(u)
-		max_edges = get_max_edges(len(neighbors))
-		actual_edges = 0
-		for v in neighbors: #for each neighbor's neighbor 
-			#for example for a, we have 3 neighbors b,c,d
-			#this for loop is meant to check each b c and d to see if there is an edge between them
-			#v_neighbors = graph.get_neighbors(v)
-			for w in neighbors:
-				if v < w and graph.is_adjacent(v,w):
-					actual_edges+=1
-		print(f"actual edges for {u}: {actual_edges}")
-		print(f"max edges for {u}: {max_edges}")
-		clustering_coefficients[u] = actual_edges/max_edges #add to our dict to compute average later
+	total_triplets = 0
+	triangle_count = get_triangles(graph)
+	for v in range(graph.get_num_nodes()):
+		deg = len(graph.get_neighbors(v))
+		total_triplets += deg * (deg - 1) // 2
 
-	
-	#compute average
-	#print(f'clustering_coefficients: {clustering_coefficients}')
-	return sum(clustering_coefficients.values())/graph.get_num_nodes()
+	if total_triplets == 0:
+		return 0.0
+
+	return (3 * triangle_count) / total_triplets
 	
 
 

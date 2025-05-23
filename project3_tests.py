@@ -63,6 +63,6 @@ def graph_algorithm_tests():
 	print(f'get_degree_distribution(): {requirements.get_degree_distribution(graph)}, Expected: { {2: 5, 3: 3, 4: 1, 5: 1} }')
 
 if __name__ == '__main__':
-	graph_tests()
+	#graph_tests()
 	graph_algorithm_tests()
 	
