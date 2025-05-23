@@ -118,11 +118,7 @@ def get_clustering_coefficient(graph: Graph) -> float:
 	
 	#compute average
 	#print(f'clustering_coefficients: {clustering_coefficients}')
-	#return sum(clustering_coefficients.values())/(len(clustering_coefficients))
-	non_zero_coeffs = [coeff for coeff in clustering_coefficients.values() if coeff > 0]
-	if not non_zero_coeffs:  # Avoid division by zero
-		return 0
-	return sum(non_zero_coeffs) / len(non_zero_coeffs)
+	return sum(clustering_coefficients.values())/(len(clustering_coefficients))
 	
 
 
