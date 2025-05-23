@@ -4,7 +4,7 @@ from graph import Graph
 from collections import deque, defaultdict
 from random import randint, seed
 
-seed(1)
+
 
 '''
 def get_diameter_naive(graph: Graph) -> int: #gets exact diameter but slow
@@ -51,7 +51,7 @@ def get_diameter(graph: Graph) -> int: #use a heuristic instead of getting exact
 		while(len(q) > 0):
 
 			node = q.popleft()
-			for neighbor in g.get_neighbors(node):
+			for neighbor in g.get_neighbors(node):		
 				if neighbor not in visited:
 					q.append(neighbor)
 					visited.add(neighbor)
@@ -64,7 +64,7 @@ def get_diameter(graph: Graph) -> int: #use a heuristic instead of getting exact
 	
 
 	# Step 1: Let r be a random vertex and set Dmax = 0
-	r = randint(0,graph.get_num_nodes())
+	r = randint(0,graph.get_num_nodes()-1)
 	dmax = 0
 
 	
