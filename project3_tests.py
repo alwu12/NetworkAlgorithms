@@ -3,6 +3,7 @@ import requirements
 
 from collections.abc import Iterable
 
+
 # Instructions
 # Some test cases for the Graph class and the graph algorithms can be found in the main block below.
 #

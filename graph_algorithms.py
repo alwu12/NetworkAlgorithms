@@ -4,6 +4,7 @@ from graph import Graph
 from collections import deque, defaultdict
 from random import randint, seed
 
+seed(1)
 
 '''
 def get_diameter_naive(graph: Graph) -> int: #gets exact diameter but slow
@@ -92,12 +93,9 @@ def get_clustering_coefficient(graph: Graph) -> float:
 
 
 def get_degree_distribution(graph: Graph) -> dict[int, int]:
-	degree_dict = {}
 	degree_distribution = defaultdict(int)
-	for i in range(0,graph.get_num_nodes()):
-		degree_dict[i] = len(graph.adjacency_list[i])
-	
-	for i in degree_dict.values():
-		degree_distribution[i] += 1
+	for i in range(0,graph.get_num_nodes()): #get the degrees of each node
+		degree_distribution[len(graph.adjacency_list[i])] += 1
+	#a dict of the format{degree:num nodes with that degree}
 	return degree_distribution
 
