@@ -8,12 +8,12 @@ class Graph:
 		self.num_nodes = num_nodes
 		self.edges = edges
 
-		self.adjacency_list = [[] for _ in range(num_nodes)]
+		self.adjacency_list = [set() for _ in range(num_nodes)]
 		#one list for each node
 
-		for i in self.edges:
-			self.adjacency_list[i[0]].append(i[1])
-			self.adjacency_list[i[1]].append(i[0])
+		for u,v in self.edges:
+			self.adjacency_list[u].add(v)
+			self.adjacency_list[v].add(u)
 
 
 	def get_num_nodes(self) -> int:

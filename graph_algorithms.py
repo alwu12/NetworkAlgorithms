@@ -64,7 +64,7 @@ def get_triangles(graph: Graph) -> int:
             
             for w in neighbors_u:
                 # enforce w > v to avoid repeats
-                if w < v:
+                if w <= v:
                     continue
                 
                 if graph.is_adjacent(v, w):

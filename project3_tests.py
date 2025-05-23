@@ -57,8 +57,8 @@ def graph_algorithm_tests():
 	graph = requirements.Graph(10, {(0, 3), (0, 7), (1, 4), (1, 5), (1, 6), (2, 3), (2, 7), (3, 4), (3, 8), (3, 9), (4, 5), (4, 9), (5, 6), (8, 9)})
 	print(f'get_diameter(): {requirements.get_diameter(graph)}, Expected: 5')
 	print(f'get_clustering_coefficient(): {requirements.get_clustering_coefficient(graph)}, Expected: 0.4')
-	for i,node in enumerate(graph.adjacency_list):
-		print(f'Node {i} adjacency list: {node}')
+	#for i,node in enumerate(graph.adjacency_list):
+	#	print(f'Node {i} adjacency list: {node}')
 	print(f'get_degree_distribution(): {requirements.get_degree_distribution(graph)}, Expected: { {2: 5, 3: 3, 4: 1, 5: 1} }')
 
 if __name__ == '__main__':
