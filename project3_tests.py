@@ -1,6 +1,5 @@
 from typing import Collection
 import requirements
-
 from collections.abc import Iterable
 
 
