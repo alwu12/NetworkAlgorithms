@@ -37,7 +37,7 @@ def get_diameter_naive(graph: Graph) -> int: #gets exact diameter but slow
 	return max_length
 '''
 
-def get_diameter(graph: Graph) -> int: #use a heuristic
+def get_diameter(graph: Graph) -> int: #use a heuristic instead of getting exact diameter from bfsing all nodes
 	def bfs(g: Graph, source_node) -> int:
 		longest_path = 0
 		furthest_node = source_node #should be equivalent to 0
@@ -92,4 +92,12 @@ def get_clustering_coefficient(graph: Graph) -> float:
 
 
 def get_degree_distribution(graph: Graph) -> dict[int, int]:
-	raise NotImplementedError
+	degree_dict = {}
+	degree_distribution = defaultdict(int)
+	for i in range(0,graph.get_num_nodes()):
+		degree_dict[i] = len(graph.adjacency_list[i])
+	
+	for i in degree_dict.values():
+		degree_distribution[i] += 1
+	return degree_distribution
+

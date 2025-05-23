@@ -15,6 +15,7 @@ class Graph:
 			self.adjacency_list[i[0]].append(i[1])
 			self.adjacency_list[i[1]].append(i[0])
 
+
 	def get_num_nodes(self) -> int:
 		return self.num_nodes
 
