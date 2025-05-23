@@ -21,10 +21,10 @@ class Graph:
 		return self.num_nodes
 
 	def get_num_edges(self) -> int:
-		return len(self.edge_list)
+		return len(self.edges)
 
 	def get_neighbors(self, node: int) -> Iterable[int]:
-		return self.edges[node]
+		return self.adjacency_list[node]
 
 	# feel free to define new methods in addition to the above
 	# fill in the definitions of each required member function (above),
