@@ -21,6 +21,9 @@ class Graph:
 
 	def get_num_edges(self) -> int:
 		return len(self.edges)
+	
+	def get_edges(self) -> Iterable[tuple[int, int]]:
+		return self.edges
 
 	def get_neighbors(self, node: int) -> Iterable[int]:
 		return self.adjacency_list[node]
