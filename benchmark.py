@@ -16,8 +16,8 @@ class PermutationType(Enum):
     ERDOS_RENYI = 'erdos_renyi'
 
 GRAPH_ALGORITHMS = {
-    'diameter' : requirements.get_diameter,
-    'clustering_coefficient' : requirements.get_clustering_coefficient,
+    #'diameter' : requirements.get_diameter,
+    'clustering_coefficient' : requirements.get_clustering_coefficient
     #'degree_distribution' : requirements.get_degree_distribution
 }
 
@@ -70,7 +70,7 @@ def run_benchmark(size: int)->None:
             save_data(algorithm_name,size,permutation,result)
 
 def run_benchmarks():  # should do 10 runs of up to 2^20 with half increments
-    for round_num in range(10):  # 10 runs total
+    for round_num in range(80):  # 10 runs total
         print(f"\n=== Round {round_num + 1}/10 ===")
 
         exp = 1
@@ -88,15 +88,18 @@ def run_benchmarks():  # should do 10 runs of up to 2^20 with half increments
             exp += 0.5
 
 def save_degree_distribution(degree_counts: dict[int, int], n: int) -> None:
-    filename = f"degree_distribution_n{n}.csv"
-    filepath = Path("data") / filename
-    filepath.parent.mkdir(exist_ok=True)  # make sure 'data' directory exists
+    directory = Path("data") / "degree_distribution"
+    directory.mkdir(parents=True, exist_ok=True)  # make sure folder exists
+
+    filename = f"degree_distribution_{n}.csv"
+    filepath = directory / filename
     
     with open(filepath, mode='w', newline='') as f:
         writer = csv.writer(f)
-        writer.writerow(['degree', 'count'])  # header
+        #writer.writerow(['degree', 'count'])  # optional header
         for degree, count in sorted(degree_counts.items()):
             writer.writerow([degree, count])
+    
     print(f"Saved degree distribution for n={n} to {filepath}")
 
 
@@ -108,6 +111,6 @@ def save_all_degree_distributions():
         save_degree_distribution(degree_counts, n)
 
 if __name__ == "__main__":
-    #save_all_degree_distributions()
-    run_benchmarks()
+    save_all_degree_distributions()
+    #run_benchmarks()
     #run_benchmarks_alternating()

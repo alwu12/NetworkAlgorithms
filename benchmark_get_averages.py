@@ -2,7 +2,7 @@ from pathlib import Path
 import csv
 from collections import defaultdict
 
-def calc_average(bin_packing_data):
+def calc_average(graph_data):
     '''
     BIN_PACKING_ALGORITHMS = {
         'next_fit' : {},
@@ -14,9 +14,10 @@ def calc_average(bin_packing_data):
 
     averages = {}
 
-
-    for size,waste in bin_packing_data.items():
-        averages[size] = sum(waste)/len(waste)
+    for size, nums in graph_data.items():  # `nums` is a list
+        total = sum(nums)
+        count = len(nums)
+        averages[size] = total / count if count > 0 else 0  # handle empty lists safely
 
     return averages
 
