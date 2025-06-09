@@ -16,8 +16,8 @@ class PermutationType(Enum):
     ERDOS_RENYI = 'erdos_renyi'
 
 GRAPH_ALGORITHMS = {
-    #'diameter' : requirements.get_diameter,
-    'clustering_coefficient' : requirements.get_clustering_coefficient
+    'diameter' : requirements.get_diameter,
+    #'clustering_coefficient' : requirements.get_clustering_coefficient
     #'degree_distribution' : requirements.get_degree_distribution
 }
 
@@ -70,7 +70,7 @@ def run_benchmark(size: int)->None:
             save_data(algorithm_name,size,permutation,result)
 
 def run_benchmarks():  # should do 10 runs of up to 2^20 with half increments
-    for round_num in range(80):  # 10 runs total
+    for round_num in range(300):  # 10 runs total
         print(f"\n=== Round {round_num + 1}/10 ===")
 
         exp = 1
@@ -111,6 +111,6 @@ def save_all_degree_distributions():
         save_degree_distribution(degree_counts, n)
 
 if __name__ == "__main__":
-    save_all_degree_distributions()
-    #run_benchmarks()
+    #save_all_degree_distributions()
+    run_benchmarks()
     #run_benchmarks_alternating()
